@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emp Dept Demo</title>
+
+
+    <style type="text/css">
+        .init{}
+        .edit{color: #0000ff;}
+        .remove{color: #0000ff;}
+        .mngBtn{width: 200px;height: 50px;}
+        .fs{width: 600px}
+    </style>
+
+    <script src="../libs/jquery-3.4.0.min.js"></script>
+    <script src="../libs/underscore-min.js"></script>
+    <script src="../libs/backbone-min.js"></script>
+    <script src="../libs/juicer-min.js"></script>
+    <script src="../js/EmpDept.js"></script>
+
+</head>
+<body>
+
+<section id="Menus">
+
+    <div>
+        <button id="deptMngBtn" class="mngBtn">部门管理</button>
+        <button id="empMngBtn" class="mngBtn">员工管理</button>
+    </div>
+    <br>
+
+</section>
+
+<div id="deptMngSection">
+    <fieldset class="fs">
+        <legend>部门管理</legend>
+        <section id="deptContainer">
+            <div id="deptAddView">
+
+            </div>
+            <div id="deptListView">
+
+            </div>
+        </section>
+    </fieldset>
+</div>
+
+
+<h2>===========================</h2>
+<div id="empMngSection">
+    <fieldset class="fs">
+        <legend>员工管理</legend>
+        <section id="empContainer">
+            <div id="empAddView">
+
+            </div>
+            <div id="empListView">
+
+            </div>
+        </section>
+    </fieldset>
+</div>
+
+
+
+
+
+<!--部门添加模板-->
+<script type="text/template" id="deptAddTemplate">
+    <fieldset style="width: 500px">
+        <legend>部门信息--添加</legend>
+        部门编号：<input type="text" id="deptNo" name="deptNo" placeholder=""><br>
+        部门名称：<input type="text" id="deptName" name="deptName" placeholder=""><br>
+        <button id="saveDeptBtn">添加部门</button>
+    </fieldset>
+</script>
+
+<!--部门列表展示模板-->
+<script type="text/template" id="deptListTemplate">
+    <fieldset style="width: 500px">
+        <legend>部门信息--列表</legend>
+        <table border="1" width="400">
+            <thead>
+            <th>部门名称</th><th>部门编号</th><th colspan="2">操作</th>
+            </thead>
+            <tbody>
+            {@each deptList as dept}
+                <tr id="${dept.id}">
+                    <td class="init">${dept.name}</td>
+                    <td class="init">${dept.deptNo}</td>
+                    <td class="edit">编辑</td>
+                    <td class="remove">删除</td>
+                </tr>
+            {@/each}
+
+            </tbody>
+        </table>
+
+    </fieldset>
+</script>
+
+
+<!--员工添加模板-->
+<script type="text/template" id="empAddTemplate">
+    <fieldset style="width: 500px">
+        <legend>员工信息--添加</legend>
+        员工姓名：<input type="text" id="empName" name="empName" placeholder=""><br>
+        员工编号：<input type="text" id="empNo" name="empNo" placeholder=""><br>
+        所属部门：<select id="empDeptList" style="width: 160px">
+                    {@each deptList as dept}
+                        <option deptId="${dept.id}">${dept.name}</option>
+                    {@/each}
+                 </select><br>
+        <button id="saveEmpBtn">添加员工</button>
+    </fieldset>
+</script>
+
+<script type="text/template" id="empListTemplate" >
+    <fieldset style="width: 500px">
+        <legend>员工信息--列表</legend>
+        <table border="1" width="400">
+
+            <thead>
+            <th>编号</th><th>姓名</th><th>部门</th><th colspan="2">操作</th>
+            </thead>
+
+            <tbody>
+                {@each empList as emp}
+                    <tr id="${emp.id}">
+                        <td class="init">${emp.empNo}</td>
+                        <td class="init">${emp.name}</td>
+                        <td class="init">${emp.dept}</td>
+                        <td class="edit">编辑</td>
+                        <td class="remove">删除</td>
+                    </tr>
+                {@/each}
+            </tbody>
+
+        </table>
+    </fieldset>
+</script>
+
+</body>
+</html>
